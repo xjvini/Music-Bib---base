@@ -62,6 +62,8 @@ Após o login bem-sucedido, o usuário acessa o menu principal da biblioteca de 
 4 - Listar todas
 5 - Buscar (título / artista / gênero)
 0 - Sair
+```
+
 
 ## 💾 Persistência de dados
 
