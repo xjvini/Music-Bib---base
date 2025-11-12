@@ -81,9 +81,15 @@ Após o login bem-sucedido, o usuário acessa o menu principal da biblioteca de 
 
 ~/.mini-bib-musicas/musicas.csv
 
-## 🧩 Herança e Polimorfismo
+## 🚀 Novidades da versão v1.4
 
-A estrutura do projeto utiliza os conceitos de Herança e Polimorfismo para organizar os diferentes tipos de mídias.
+O principal implemento nesta versão é a otimização do código para incluirr corretamente os conceitos de herança e polimorfismo, tornando o sistema mais robusto e extensível.
+
+---
+
+### 🧩 Herança e Polimorfismo
+
+A estrutura do projeto agora utiliza os conceitos de Herança e Polimorfismo para organizar os diferentes tipos de mídias.
 
 * **Superclasse Abstrata: `Midia`**
     * Funciona como a base para todas as mídias.
@@ -94,9 +100,9 @@ A estrutura do projeto utiliza os conceitos de Herança e Polimorfismo para orga
     * Adiciona seus próprios atributos específicos, como `artista` e `album`.
     * Sobrescreve o método `descricao()` (com `@Override`) para exibir detalhes específicos de uma música, demonstrando polimorfismo.
 
-### 🔁 Opção 6: Demonstração de Polimorfismo
+#### 🔁 Opção 6: Demonstração de Polimorfismo
 
-Esta opção executa um exemplo simples de polimorfismo dinâmico (em tempo de execução).
+Para testar essa nova estrutura, esta opção executa um exemplo simples de polimorfismo dinâmico (em tempo de execução).
 
 O sistema realiza os seguintes passos:
 
