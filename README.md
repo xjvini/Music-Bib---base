@@ -25,7 +25,7 @@ src/
 ├── app/
 │   └── Main.java             # CLI e controle de autenticação
 ├── model/
-│   ├── Midia.java            #
+│   ├── Midia.java            # Superclasse abstrata que representa qualquer tipo de mídia (título, gênero e duração)
 │   ├── Musica.java           # Entidade música (UUID + atributos privados)
 │   └── Usuario.java          # Entidade usuário
 ├── repository/
