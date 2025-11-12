@@ -61,6 +61,7 @@ Após o login bem-sucedido, o usuário acessa o menu principal da biblioteca de 
 3 - Remover música
 4 - Listar todas
 5 - Buscar (título / artista / gênero)
+6 - Demonstração do polimorfismo
 0 - Sair
 ```
 
