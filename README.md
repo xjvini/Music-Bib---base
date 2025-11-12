@@ -25,6 +25,7 @@ src/
 ├── app/
 │   └── Main.java             # CLI e controle de autenticação
 ├── model/
+│   ├── Midia.java            #
 │   ├── Musica.java           # Entidade música (UUID + atributos privados)
 │   └── Usuario.java          # Entidade usuário
 ├── repository/
@@ -46,14 +47,14 @@ src/
 
 ## 🔐 Fluxo de Uso
 
-### Ao iniciar o programa, escolha entre:
+Ao iniciar a aplicação, o usuário deve primeiro se autenticar:
 
-1 Registrar novo usuário
+1.  **Registrar** um novo usuário.
+2.  **Fazer login** com um usuário existente.
 
-2 Fazer login
+Após o login bem-sucedido, o usuário acessa o menu principal da biblioteca de músicas:
 
-### Após logado, acesse o menu principal:
-
+```bash
 ==== MINI BIBLIOTECA DE MÚSICAS ====
 1 - Adicionar música
 2 - Editar música
@@ -62,14 +63,50 @@ src/
 5 - Buscar (título / artista / gênero)
 0 - Sair
 
+## 💾 Persistência de dados
+
+* **Arquivo:**
+    * Todas as músicas são armazenadas no arquivo `musicas.csv`
+
+* **Formato:**
+    * Cada música corresponde a uma linha no arquivo, com os campos delimitados por `;` (ponto e vírgula). 
+    * O sistema lida automaticamente com o "escape" de caracteres especiais (como `\n` e `;`) que possam existir nos dados.
+
+* **Leitura e gravação:**
+    * Os dados são carregados do CSV para a memória na inicialização do sistema e são salvos de volta no arquivo após cada modificação (adicionar, editar ou remover), garantindo que as alterações sejam persistidas.
+
 ### Todas as músicas são salvas automaticamente em:
 
 ~/.mini-bib-musicas/musicas.csv
 
-## 💾 Persistência
+## 🧩 Herança e Polimorfismo
 
-Cada música é armazenada como linha no arquivo musicas.csv.
+A estrutura do projeto utiliza os conceitos de Herança e Polimorfismo para organizar os diferentes tipos de mídias.
 
-O formato é delimitado por ; e escapa \n e ; automaticamente.
+* **Superclasse Abstrata: `Midia`**
+    * Funciona como a base para todas as mídias.
+    * Contém atributos genéricos/comuns, como `titulo`, `genero` e `duracaoSegundos`.
 
-O sistema carrega os dados na inicialização e salva após cada modificação.
+* **Subclasse: `Musica`**
+    * Herda diretamente de `Midia` (usando `extends`).
+    * Adiciona seus próprios atributos específicos, como `artista` e `album`.
+    * Sobrescreve o método `descricao()` (com `@Override`) para exibir detalhes específicos de uma música, demonstrando polimorfismo.
+
+### 🔁 Opção 6: Demonstração de Polimorfismo
+
+Esta opção executa um exemplo simples de polimorfismo dinâmico (em tempo de execução).
+
+O sistema realiza os seguintes passos:
+
+1.  Cria uma lista da superclasse (`ArrayList<Midia>`).
+2.  Adiciona objetos da subclasse (`Musica`) diretamente nessa lista.
+3.  Itera sobre a lista e chama o método de exibição de cada item.
+
+Graças ao polimorfismo, o Java invoca automaticamente o método sobrescrito (override) na classe `Musica`, exibindo os detalhes específicos da música, em vez do método genérico da superclasse `Midia`.
+
+**Exemplo de saída no terminal:**
+
+```bash
+-- Demonstração de Polimorfismo --
+Música: Thunderstruck - AC/DC (Rock) [292s]
+Música: Bohemian Rhapsody - Queen (Rock) [354s]
