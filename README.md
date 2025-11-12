@@ -25,7 +25,7 @@ src/
 ├── app/
 │   └── Main.java             # CLI e controle de autenticação
 ├── model/
-│   ├── Midia.java            # Superclasse abstrata que representa qualquer tipo de mídia (título, gênero e duração)
+│   ├── Midia.java (novo)     # Superclasse abstrata que representa qualquer tipo de mídia (título, gênero e duração)
 │   ├── Musica.java           # Entidade música (UUID + atributos privados)
 │   └── Usuario.java          # Entidade usuário
 ├── repository/
@@ -60,8 +60,8 @@ Após o login bem-sucedido, o usuário acessa o menu principal da biblioteca de 
 2 - Editar música
 3 - Remover música
 4 - Listar todas
-5 - Buscar (título / artista / gênero)
-6 - Demonstração do polimorfismo
+5 - Buscar
+6 - Demonstração do polimorfismo (novo)
 0 - Sair
 ```
 
