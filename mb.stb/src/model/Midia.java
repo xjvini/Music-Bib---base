@@ -1,5 +1,5 @@
 package model;
-
+import exception.RegraNegocioException;
 /**
  * Superclasse genérica para itens da biblioteca.
  */
@@ -14,11 +14,11 @@ public abstract class Midia {
         setDuracaoSegundos(duracaoSegundos);
     }
 
-    // (atributos privados, com validação) ---
+    // (atributos privados, com validação e substituição da exceção por uma personalizada)
     public String getTitulo() { return titulo; }
     public void setTitulo(String titulo) {
         if (titulo == null || titulo.isBlank()) {
-            throw new IllegalArgumentException("Título não pode ser vazio.");
+            throw new RegraNegocioException("TITULO não pode ser vazio.");
         }
         this.titulo = titulo.trim();
     }
@@ -31,7 +31,7 @@ public abstract class Midia {
     public int getDuracaoSegundos() { return duracaoSegundos; }
     public void setDuracaoSegundos(int duracaoSegundos) {
         if (duracaoSegundos <= 0) {
-            throw new IllegalArgumentException("Duração deve ser maior que zero (em segundos).");
+            throw new RegraNegocioException("DURAÇÃO deve ser maior que zero (em segundos).");
         }
         this.duracaoSegundos = duracaoSegundos;
     }

@@ -1,5 +1,5 @@
 package model;
-
+import exception.RegraNegocioException;
 /**
  * Representa um usuário do sistema.
  * email é considerado identificador e não possui setter.
@@ -11,7 +11,7 @@ public class Usuario {
 
     public Usuario(String nome, String email, String senha) {
         if (email == null || email.isBlank()) {
-            throw new IllegalArgumentException("Email não pode ser vazio.");
+            throw new RegraNegocioException("EMAIL não pode estar vazio.");
         }
         this.email = email.trim().toLowerCase();
         setNome(nome);
@@ -21,7 +21,7 @@ public class Usuario {
     public String getNome() { return nome; }
     public void setNome(String nome) {
         if (nome == null || nome.isBlank()) {
-            throw new IllegalArgumentException("Nome não pode ser vazio.");
+            throw new RegraNegocioException("NOME não pode estar vazio.");
         }
         this.nome = nome.trim();
     }
@@ -31,7 +31,7 @@ public class Usuario {
     public String getSenha() { return senha; }
     public void setSenha(String senha) {
         if (senha == null || senha.length() < 4) {
-            throw new IllegalArgumentException("Senha deve ter pelo menos 4 caracteres.");
+            throw new RegraNegocioException("SENHA deve ter pelo menos 4 caracteres.");
         }
         this.senha = senha;
     }

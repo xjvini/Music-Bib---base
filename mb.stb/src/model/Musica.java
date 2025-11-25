@@ -1,5 +1,5 @@
 package model;
-
+import exception.RegraNegocioException;
 import java.util.UUID;
 
 public class Musica extends Midia {
@@ -26,7 +26,7 @@ public class Musica extends Midia {
     public String getArtista() { return artista; }
     public void setArtista(String artista) {
         if (artista == null || artista.isBlank()) {
-            throw new IllegalArgumentException("Artista não pode ser vazio.");
+            throw new RegraNegocioException("ARTISTA não pode estar vazio.");
         }
         this.artista = artista.trim();
     }

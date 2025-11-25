@@ -11,6 +11,8 @@ import java.util.Optional;
 import java.util.Scanner;
 import java.util.UUID;
 
+import exception.RegraNegocioException;
+
 public class Main {
 
     private static final Scanner in = new Scanner(System.in);
@@ -60,8 +62,10 @@ public class Main {
             Usuario u = new Usuario(nome, email, senha);
             boolean ok = users.cadastrar(u);
             System.out.println(ok ? "Usuário registrado com sucesso." : "Não foi possível registrar.");
-        } catch (IllegalArgumentException ex) {
-            System.out.println("Erro: " + ex.getMessage());
+        } catch (RegraNegocioException ex) { // alterado para capturar a exceção personalizada
+            System.out.println("Erro de validação: " + ex.getMessage());
+        } catch (Exception ex) { // captura exceções "genericas"
+            System.out.println("Erro inesperado: " + ex.getMessage());
         }
     }
 
@@ -91,7 +95,7 @@ public class Main {
                 case 3 -> remover();
                 case 4 -> listar();
                 case 5 -> buscar();
-                case 6 -> demoPolimorfismo(); // << NOVO
+                case 6 -> demoPolimorfismo();
                 case 0 -> System.out.println("Saindo... valeu!");
                 default -> System.out.println("Opção inválida.");
             }
@@ -107,7 +111,7 @@ public class Main {
         System.out.println("3 - Remover música");
         System.out.println("4 - Listar todas");
         System.out.println("5 - Buscar (título / artista / gênero)");
-        System.out.println("6 - Demonstração de polimorfismo"); // << NOVO
+        System.out.println("6 - Demonstração de polimorfismo"); 
         System.out.println("0 - Sair");
     }
 
@@ -122,7 +126,7 @@ private static void demoPolimorfismo() {
 
     java.util.List<Midia> itens = new java.util.ArrayList<>();
     for (var m : repo.listarTodas()) { // repo.listarTodas() retorna List<Musica>
-        itens.add(m); // upcasting implícito: Musica -> Midia
+        itens.add(m); 
     }
 
     if (itens.isEmpty()) {
@@ -131,7 +135,7 @@ private static void demoPolimorfismo() {
     }
 
     for (Midia midia : itens) {
-        // Chamada polimórfica: executa Musica.descricao(), não Midia.descricao()
+        // Chamada polimórfica
         System.out.println(midia.descricao());
     }
 }
@@ -162,8 +166,10 @@ private static void demoPolimorfismo() {
             } else {
                 System.out.println("⚠️ Já existe uma música idêntica cadastrada.");
             }
-        } catch (IllegalArgumentException ex) {
-            System.out.println("Erro: " + ex.getMessage());
+        } catch (RegraNegocioException ex) { // mesmo tratamento descrito nas excessões do método registrar()
+            System.out.println("Erro de validação: " + ex.getMessage());
+        } catch (Exception ex) {
+            System.out.println("Erro inesperado: " + ex.getMessage());
         }
     }
 
@@ -188,16 +194,25 @@ private static void demoPolimorfismo() {
         String novoGenero = lerStrOpcional("Novo gênero: ");
         Integer novaDuracao = lerIntOpcional("Nova duração (segundos): ");
 
-        boolean ok = repo.editarMusica(
-                id,
-                vazioParaNull(novoTitulo),
-                vazioParaNull(novoArtista),
-                vazioParaNull(novoAlbum),
-                vazioParaNull(novoGenero),
-                novaDuracao
-        );
+        // novo tratamento que lida com a exceção RegraNegocioException
+        try {
+            boolean ok = repo.editarMusica(
+                    id,
+                    vazioParaNull(novoTitulo),
+                    vazioParaNull(novoArtista),
+                    vazioParaNull(novoAlbum),
+                    vazioParaNull(novoGenero),
+                    novaDuracao
+            );
 
-        System.out.println(ok ? "Música editada com sucesso." : "Não foi possível editar.");
+            System.out.println(ok ? "Música editada com sucesso." : "Não foi possível editar.");
+
+        } catch (RegraNegocioException ex) { 
+            System.out.println("Erro ao editar: " + ex.getMessage());
+
+        } catch (Exception ex) { 
+            System.out.println("Erro inesperado ao salvar: " + ex.getMessage());
+        }
     }
 
     private static void remover() {
