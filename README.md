@@ -24,6 +24,8 @@ A Mini Biblioteca de Músicas é um aplicativo de linha de comando (CLI) que pos
 src/
 ├── app/
 │   └── Main.java             # CLI e controle de autenticação
+├── exception/
+│   └── RegraNegocioException.java # Exceção personalizada
 ├── model/
 │   ├── Midia.java (novo)     # Superclasse abstrata que representa qualquer tipo de mídia (título, gênero e duração)
 │   ├── Musica.java           # Entidade música (UUID + atributos privados)
